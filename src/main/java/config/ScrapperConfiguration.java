@@ -1,11 +1,19 @@
 package config;
 
 public class ScrapperConfiguration {
-    static {
-        String cineplexURLString = "";
-        String blockbusterURLString = "";
+    // props
+    public static String cineplexURLString;
+    public static String blockbusterURLString;
 
-        String cineplexJSONDumpFile = "/scrapper-dump/cineplex.json";
-        String blockbusterJSONDumpFile = "/scrapper-dump/blockbuster.json";
+    public static String cineplexJSONDumpFile;
+    public static String blockbusterJSONDumpFile;
+
+    // static initializer
+    static {
+        cineplexURLString = "http://www.cineplexbd.com/cineplexbd/showtime";
+        blockbusterURLString = "";
+
+        cineplexJSONDumpFile = "/scrapper-dump/cineplex.json";
+        blockbusterJSONDumpFile = "/scrapper-dump/blockbuster.json";
     }
 }
