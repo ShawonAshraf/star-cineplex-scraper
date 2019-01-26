@@ -1,7 +1,11 @@
 package app;
 
+import config.ScrapperConfiguration;
+import scrapper.Scrapper;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("INIT");
+        Scrapper cineplexScrapper = new Scrapper(ScrapperConfiguration.cineplexURLString);
+        cineplexScrapper.scrap();
     }
 }
