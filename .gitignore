@@ -206,5 +206,8 @@ gradle-app.setting
 ### Gradle Patch ###
 **/build/
 
+## web drivers ##
+geckodriver
+
 # End of https://www.gitignore.io/api/osx,java,linux,gradle,windows,intellij+all,visualstudiocode
 
