@@ -20,7 +20,7 @@ public class Scrapper {
     }
 
     public void scrap() {
-        URL firefoxDriverURL = null;
+        URL firefoxDriverURL;
         WebDriver webDriver = null;
 
         System.out.println(String.format("Scrapping from => %s", urlToScrapFrom));
