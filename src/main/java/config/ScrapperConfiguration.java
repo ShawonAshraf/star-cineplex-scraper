@@ -8,6 +8,9 @@ public class ScrapperConfiguration {
     public static String cineplexJSONDumpFile;
     public static String blockbusterJSONDumpFile;
 
+    public static String firefoxDriverURLString;
+//    public static String chromeDriverURLString;
+
     // static initializer
     static {
         cineplexURLString = "http://www.cineplexbd.com/cineplexbd/showtime";
@@ -15,5 +18,7 @@ public class ScrapperConfiguration {
 
         cineplexJSONDumpFile = "/scrapper-dump/cineplex.json";
         blockbusterJSONDumpFile = "/scrapper-dump/blockbuster.json";
+
+        firefoxDriverURLString = "geckodriver";
     }
 }
