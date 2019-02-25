@@ -2,6 +2,8 @@ package scrapper;
 
 import config.CineplexConfig;
 import config.ScrapperConfiguration;
+import model.Movie;
+import model.RawData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +16,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CinplexScrapper implements Scrapper {
     private URL firefoxDriverURL;
@@ -76,7 +80,8 @@ public class CinplexScrapper implements Scrapper {
                         waiter.until(ExpectedConditions.visibilityOfElementLocated(
                                 By.className(CineplexConfig.timeInformationClass)));
 
-                        scrapShowTimeAndDateByLocation(locationName);
+                        var rawData = scrapShowTimeAndDateByLocation(locationName);
+                        System.out.println(rawData);
                     }
                 }
             }
@@ -92,19 +97,26 @@ public class CinplexScrapper implements Scrapper {
         }
     }
 
-    private void scrapShowTimeAndDateByLocation(String location) {
-        System.out.println(location);
+    private RawData scrapShowTimeAndDateByLocation(String location) {
+        RawData rawData = new RawData(location);
 
         var showTimes = webDriver.findElements(By.className(CineplexConfig.timeInformationClass));
         var dates = webDriver.findElements(By.className(CineplexConfig.dateInfoClass));
 
-        for (WebElement date : dates) {
-            System.out.println(date.getText());
-            System.out.println("=====================");
-            for (WebElement showTime : showTimes) {
-                System.out.println(showTime.getText());
+        for (var date : dates) {
+            var dateString = date.getText();
+
+            // init rawData date
+            rawData.getMovieDates().put(dateString, new ArrayList<>());
+
+            for (var showTime : showTimes) {
+                var showTimeString = showTime.getText();
+
+                rawData.getMovieDates().get(dateString).add(showTimeString);
             }
-            System.out.println();
         }
+
+        return rawData;
     }
+
 }
