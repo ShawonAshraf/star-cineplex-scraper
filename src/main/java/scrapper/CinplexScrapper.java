@@ -12,11 +12,12 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 
-public class CinplexScrapper {
-    public void scrap() {
-        URL firefoxDriverURL;
-        WebDriver webDriver = null;
+public class CinplexScrapper implements Scrapper {
+    private URL firefoxDriverURL;
+    private WebDriver webDriver = null;
 
+    @Override
+    public void scrap() {
         System.out.println(String.format("Scrapping from => %s", CineplexConfig.urlString));
 
         try {
@@ -24,7 +25,8 @@ public class CinplexScrapper {
             assert firefoxDriverURL != null;
 
             // set the prop
-            System.setProperty("webdriver.gecko.driver", Paths.get(firefoxDriverURL.toURI()).toFile().getAbsolutePath());
+            System.setProperty(ScrapperConfiguration.firefoxDriverName,
+                    Paths.get(firefoxDriverURL.toURI()).toFile().getAbsolutePath());
 
             // log
             System.out.println("driver in use => " + firefoxDriverURL);
