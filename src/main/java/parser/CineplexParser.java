@@ -7,6 +7,7 @@ import model.RawData;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class CineplexParser implements Parser {
     @Override
@@ -44,10 +45,35 @@ public class CineplexParser implements Parser {
     private class MovieDateAndTime {
         public String movieName;
         public ArrayList<String> showTimes;
+
+        public MovieDateAndTime(String movieName, ArrayList<String> showTimes) {
+            this.movieName = movieName;
+            this.showTimes = showTimes;
+        }
     }
 
     private MovieDateAndTime parseMovieInfo(String movieInfo) {
-        return null;
+        var splitData = movieInfo.split(" ");
+
+        var name = splitData[0];
+        var showTimes = parseShowTimes(splitData[1]);
+
+        return new MovieDateAndTime(name, showTimes);
+    }
+
+    // use regex to get showtimes from the string
+    private ArrayList<String> parseShowTimes(String showTimes) {
+        ArrayList<String> times = new ArrayList<>();
+        var regex = "(\\d){2}:(\\d){2} (AM|PM)";
+
+        var pattern = Pattern.compile(regex);
+        var matcher = pattern.matcher(showTimes);
+
+        while (matcher.find()) {
+            times.add(matcher.group());
+        }
+
+        return times;
     }
 
     private Date parseDateFromString(String dateString) {
