@@ -66,12 +66,16 @@ public class Scrapper {
 
             // get text from timeSection
             final String timeSectionClass = CineplexConfig.timeInformationClass;
+            final String dateInfoClass = CineplexConfig.dateInfoClass;
 
             // wait until it loads
             waiter = new WebDriverWait(webDriver, 8);
             waiter.until(ExpectedConditions.visibilityOfElementLocated(By.className(timeSectionClass)));
 
             var showTimes = webDriver.findElements(By.className(timeSectionClass));
+            var dates = webDriver.findElements(By.className(dateInfoClass));
+
+            dates.forEach(date -> System.out.println(date.getText()));
             showTimes.forEach(showTime -> System.out.println(showTime.getText()));
 
         } catch (NullPointerException e) {
