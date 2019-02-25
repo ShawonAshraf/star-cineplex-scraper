@@ -1,9 +1,15 @@
+import parser.CineplexParser;
 import scrapper.CinplexScrapper;
 import scrapper.Scrapper;
 
 public class Main {
     public static void main(String[] args) {
         Scrapper cineplexScrapper = new CinplexScrapper();
-        cineplexScrapper.scrap();
+        var scrappedData = cineplexScrapper.scrap();
+
+        var parser = new CineplexParser();
+        var movies = parser.parse(scrappedData);
+
+        System.out.println(movies);
     }
 }
