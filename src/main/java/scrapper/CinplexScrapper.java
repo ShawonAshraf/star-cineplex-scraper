@@ -64,37 +64,21 @@ public class CinplexScrapper implements Scrapper {
             var locationSelector = webDriver.findElement(By.id(CineplexConfig.locationsId));
             var locations = locationSelector.findElements(By.tagName(CineplexConfig.locationSelectorTag));
 
-            final String selectorText = CineplexConfig.locationNames[0];
 
-            locations.forEach(option -> {
-                if (option.getText().equals(selectorText)) {
-                    System.out.println("Selecting =>" + option.getText());
-                    option.click();
+            for (var location : locations) {
+                for (var locationName : CineplexConfig.locationNames) {
+                    if (location.getText().equals(locationName)) {
+                        location.click();
+                        button.click();
+
+                        // wait until it loads
+                        waiter = new WebDriverWait(webDriver, 8);
+                        waiter.until(ExpectedConditions.visibilityOfElementLocated(
+                                By.className(CineplexConfig.timeInformationClass)));
+
+                        scrapShowTimeAndDateByLocation(locationName);
+                    }
                 }
-            });
-            button.click();
-
-            // get text from timeSection
-            final String timeSectionClass = CineplexConfig.timeInformationClass;
-            final String dateInfoClass = CineplexConfig.dateInfoClass;
-
-            // wait until it loads
-            waiter = new WebDriverWait(webDriver, 8);
-            waiter.until(ExpectedConditions.visibilityOfElementLocated(By.className(timeSectionClass)));
-
-            var showTimes = webDriver.findElements(By.className(timeSectionClass));
-            var dates = webDriver.findElements(By.className(dateInfoClass));
-
-//            dates.forEach(date -> System.out.println(date.getText()));
-//            showTimes.forEach(showTime -> System.out.println(showTime.getText()));
-
-            for (WebElement date : dates) {
-                System.out.println(date.getText());
-                System.out.println("=====================");
-                for (WebElement showTime : showTimes) {
-                    System.out.println(showTime.getText());
-                }
-                System.out.println();
             }
 
         } catch (NullPointerException e) {
@@ -108,5 +92,19 @@ public class CinplexScrapper implements Scrapper {
         }
     }
 
+    private void scrapShowTimeAndDateByLocation(String location) {
+        System.out.println(location);
 
+        var showTimes = webDriver.findElements(By.className(CineplexConfig.timeInformationClass));
+        var dates = webDriver.findElements(By.className(CineplexConfig.dateInfoClass));
+
+        for (WebElement date : dates) {
+            System.out.println(date.getText());
+            System.out.println("=====================");
+            for (WebElement showTime : showTimes) {
+                System.out.println(showTime.getText());
+            }
+            System.out.println();
+        }
+    }
 }
