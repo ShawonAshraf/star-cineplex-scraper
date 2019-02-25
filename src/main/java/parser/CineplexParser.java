@@ -15,6 +15,7 @@ public class CineplexParser implements Parser {
     @Override
     public ArrayList<Movie> parse(ArrayList<RawData> rawData) {
         ArrayList<Movie> movieList = new ArrayList<>();
+        HashMap<String, Movie> movieMap = new HashMap<>();
 
         for (var data : rawData) {
             var location = data.getLocation();
@@ -28,17 +29,27 @@ public class CineplexParser implements Parser {
                     var parsedData = parseMovieInfo(movieInfo);
                     var name = parsedData.movieName;
                     var showTimes = parsedData.showTimes;
+                    var parsedDate = parseDateFromString(date);
 
                     // create info object
-                    // showTime, locations, dates
-                    var info = new MovieInfo(showTimes, new ArrayList<>(), new ArrayList<>());
-                    var movie = new Movie(name, info);
+                    // location, date, showtime
+                    var newInfo = new MovieInfo(location, parsedDate, showTimes);
 
-                    // enter data
-
+                    // check if the movie already exists
+                    // else create a new one
+                    if (movieMap.containsKey(name)) {
+                        movieMap.get(name).getInfo().add(newInfo);
+                    } else {
+                        var movie = new Movie(name, new ArrayList<>());
+                        movie.getInfo().add(newInfo);
+                        movieMap.put(name, movie);
+                    }
                 }
             }
         }
+
+        // process map
+        movieMap.forEach((k, v) -> movieList.add(v));
 
         return movieList;
     }

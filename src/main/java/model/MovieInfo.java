@@ -4,20 +4,34 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class MovieInfo {
+    private String location;
+    private Date date;
     private ArrayList<String> showTimes;
-    private ArrayList<String> locations;
-    private ArrayList<Date> dates;
 
     public MovieInfo() {
         showTimes = new ArrayList<>();
-        locations = new ArrayList<>();
-        dates = new ArrayList<>();
     }
 
-    public MovieInfo(ArrayList<String> showTimes, ArrayList<String> locations, ArrayList<Date> dates) {
+    public MovieInfo(String location, Date date, ArrayList<String> showTimes) {
+        this.location = location;
+        this.date = date;
         this.showTimes = showTimes;
-        this.locations = locations;
-        this.dates = dates;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public ArrayList<String> getShowTimes() {
@@ -26,21 +40,5 @@ public class MovieInfo {
 
     public void setShowTimes(ArrayList<String> showTimes) {
         this.showTimes = showTimes;
-    }
-
-    public ArrayList<String> getLocations() {
-        return locations;
-    }
-
-    public void setLocations(ArrayList<String> locations) {
-        this.locations = locations;
-    }
-
-    public ArrayList<Date> getDates() {
-        return dates;
-    }
-
-    public void setDates(ArrayList<Date> dates) {
-        this.dates = dates;
     }
 }

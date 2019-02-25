@@ -1,10 +1,12 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Movie {
     private String name;
-    private MovieInfo info;
+    private ArrayList<MovieInfo> info;
 
-    public Movie(String name, MovieInfo info) {
+    public Movie(String name, ArrayList<MovieInfo> info) {
         this.name = name;
         this.info = info;
     }
@@ -17,11 +19,11 @@ public class Movie {
         this.name = name;
     }
 
-    public MovieInfo getInfo() {
+    public ArrayList<MovieInfo> getInfo() {
         return info;
     }
 
-    public void setInfo(MovieInfo info) {
+    public void setInfo(ArrayList<MovieInfo> info) {
         this.info = info;
     }
 }
