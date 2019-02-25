@@ -1,9 +1,9 @@
-import config.ScrapperConfiguration;
+import scrapper.CinplexScrapper;
 import scrapper.Scrapper;
 
 public class Main {
     public static void main(String[] args) {
-        Scrapper cineplexScrapper = new Scrapper(ScrapperConfiguration.cineplexURLString);
+        Scrapper cineplexScrapper = new CinplexScrapper();
         cineplexScrapper.scrap();
     }
 }
