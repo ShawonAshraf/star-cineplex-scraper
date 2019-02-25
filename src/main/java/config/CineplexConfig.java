@@ -10,4 +10,5 @@ public class CineplexConfig {
     public static final String goButtonId = "goShowtime";
     public static final String locationsId = "locationId";
     public static final String locationSelectorTag = "option";
+    public static final String dateInfoClass = "date-tx";
 }
