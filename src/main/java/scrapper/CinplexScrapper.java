@@ -50,7 +50,7 @@ public class CinplexScrapper implements Scrapper {
     }
 
     @Override
-    public void scrap() {
+    public ArrayList<RawData> scrap() {
         initDriverURL();
         initHeadlessDriver();
 

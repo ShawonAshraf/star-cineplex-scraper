@@ -1,7 +1,11 @@
 package scrapper;
 
+import model.RawData;
+
+import java.util.ArrayList;
+
 public interface Scrapper {
-    void scrap();
+    ArrayList<RawData> scrap();
     void initHeadlessDriver();
     void initDriverURL();
 }
