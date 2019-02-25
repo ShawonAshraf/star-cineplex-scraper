@@ -4,7 +4,10 @@ import config.CineplexConfig;
 import config.ScrapperConfiguration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -35,8 +38,15 @@ public class CinplexScrapper implements Scrapper {
         }
 
         try {
+            // headless init
+            FirefoxBinary firefoxBinary = new FirefoxBinary();
+            firefoxBinary.addCommandLineOptions("--headless");
+
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            firefoxOptions.setBinary(firefoxBinary);
             // init
-            webDriver = new FirefoxDriver();
+            webDriver = new FirefoxDriver(firefoxOptions);
+
             // get the url
             webDriver.get(CineplexConfig.urlString);
             // wait until the page loads
@@ -70,8 +80,15 @@ public class CinplexScrapper implements Scrapper {
             var showTimes = webDriver.findElements(By.className(timeSectionClass));
             var dates = webDriver.findElements(By.className(dateInfoClass));
 
-            dates.forEach(date -> System.out.println(date.getText()));
-            showTimes.forEach(showTime -> System.out.println(showTime.getText()));
+//            dates.forEach(date -> System.out.println(date.getText()));
+//            showTimes.forEach(showTime -> System.out.println(showTime.getText()));
+
+            for (WebElement st : showTimes) {
+                System.out.println(st.getText());
+//                for (WebElement date : dates) {
+//                    System.out.println(date.getText());
+//                }
+            }
 
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -83,4 +100,6 @@ public class CinplexScrapper implements Scrapper {
             }
         }
     }
+
+
 }
