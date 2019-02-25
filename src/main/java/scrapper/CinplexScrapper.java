@@ -20,9 +20,19 @@ public class CinplexScrapper implements Scrapper {
     private WebDriver webDriver = null;
 
     @Override
-    public void scrap() {
-        System.out.println(String.format("Scrapping from => %s", CineplexConfig.urlString));
+    public void initHeadlessDriver() {
+        // headless init
+        FirefoxBinary firefoxBinary = new FirefoxBinary();
+        firefoxBinary.addCommandLineOptions("--headless");
 
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.setBinary(firefoxBinary);
+        // init
+        webDriver = new FirefoxDriver(firefoxOptions);
+    }
+
+    @Override
+    public void initDriverURL() {
         try {
             firefoxDriverURL = getClass().getClassLoader().getResource(ScrapperConfiguration.firefoxDriverURLString);
             assert firefoxDriverURL != null;
@@ -30,23 +40,18 @@ public class CinplexScrapper implements Scrapper {
             // set the prop
             System.setProperty(ScrapperConfiguration.firefoxDriverName,
                     Paths.get(firefoxDriverURL.toURI()).toFile().getAbsolutePath());
-
-            // log
-            System.out.println("driver in use => " + firefoxDriverURL);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void scrap() {
+        initDriverURL();
+        initHeadlessDriver();
 
         try {
-            // headless init
-            FirefoxBinary firefoxBinary = new FirefoxBinary();
-            firefoxBinary.addCommandLineOptions("--headless");
-
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.setBinary(firefoxBinary);
-            // init
-            webDriver = new FirefoxDriver(firefoxOptions);
-
+            System.out.println(String.format("Scrapping from => %s", CineplexConfig.urlString));
             // get the url
             webDriver.get(CineplexConfig.urlString);
             // wait until the page loads
@@ -83,11 +88,13 @@ public class CinplexScrapper implements Scrapper {
 //            dates.forEach(date -> System.out.println(date.getText()));
 //            showTimes.forEach(showTime -> System.out.println(showTime.getText()));
 
-            for (WebElement st : showTimes) {
-                System.out.println(st.getText());
-//                for (WebElement date : dates) {
-//                    System.out.println(date.getText());
-//                }
+            for (WebElement date : dates) {
+                System.out.println(date.getText());
+                System.out.println("=====================");
+                for (WebElement showTime : showTimes) {
+                    System.out.println(showTime.getText());
+                }
+                System.out.println();
             }
 
         } catch (NullPointerException e) {
