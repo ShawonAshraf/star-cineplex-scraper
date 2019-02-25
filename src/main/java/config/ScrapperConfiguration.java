@@ -10,6 +10,7 @@ public class ScrapperConfiguration {
     public static final String blockbusterJSONDumpFile;
 
     public static final String firefoxDriverURLString;
+    public static final String firefoxDriverName;
 //    public static String chromeDriverURLString;
 
     // static initializer
@@ -21,5 +22,6 @@ public class ScrapperConfiguration {
         blockbusterJSONDumpFile = "/scrapper-dump/blockbuster.json";
 
         firefoxDriverURLString = "geckodriver";
+        firefoxDriverName = "webdriver.gecko.driver";
     }
 }
