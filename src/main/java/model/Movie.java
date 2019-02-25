@@ -1,44 +1,27 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 public class Movie {
     private String name;
-    private ArrayList<String> showTimes;
-    private ArrayList<String> locations;
-    private ArrayList<Date> dates;
+    private MovieInfo info;
 
-    public Movie(String name, ArrayList<String> showTimes, ArrayList<String> locations, ArrayList<Date> dates) {
+    public Movie(String name, MovieInfo info) {
         this.name = name;
-        this.showTimes = showTimes;
-        this.locations = locations;
-        this.dates = dates;
+        this.info = info;
     }
 
     public String getName() {
         return name;
     }
 
-    public ArrayList<String> getShowTimes() {
-        return showTimes;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public ArrayList<String> getLocation() {
-        return locations;
+    public MovieInfo getInfo() {
+        return info;
     }
 
-    public ArrayList<Date> getDates() {
-        return dates;
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "name='" + name + '\'' +
-                ", showTimes=" + showTimes +
-                ", location='" + locations + '\'' +
-                ", dates=" + dates +
-                '}';
+    public void setInfo(MovieInfo info) {
+        this.info = info;
     }
 }
