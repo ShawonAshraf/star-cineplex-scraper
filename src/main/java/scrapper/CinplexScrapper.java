@@ -54,6 +54,8 @@ public class CinplexScrapper implements Scrapper {
         initDriverURL();
         initHeadlessDriver();
 
+        ArrayList<RawData> data = new ArrayList<>();
+
         try {
             System.out.println(String.format("Scrapping from => %s", CineplexConfig.urlString));
             // get the url
@@ -81,7 +83,7 @@ public class CinplexScrapper implements Scrapper {
                                 By.className(CineplexConfig.timeInformationClass)));
 
                         var rawData = scrapShowTimeAndDateByLocation(locationName);
-                        System.out.println(rawData);
+                        data.add(rawData);
                     }
                 }
             }
@@ -95,6 +97,8 @@ public class CinplexScrapper implements Scrapper {
                 webDriver.close();
             }
         }
+
+        return data;
     }
 
     private RawData scrapShowTimeAndDateByLocation(String location) {
