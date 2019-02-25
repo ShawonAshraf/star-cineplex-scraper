@@ -4,6 +4,8 @@ import model.Movie;
 import model.MovieInfo;
 import model.RawData;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -77,6 +79,15 @@ public class CineplexParser implements Parser {
     }
 
     private Date parseDateFromString(String dateString) {
-        return null;
+        var dateFormat = "EEEE, MMMM d, yyyy";
+        Date date = null;
+
+        try {
+            date = new SimpleDateFormat(dateFormat).parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return date;
     }
 }
