@@ -7,9 +7,6 @@ public class Main {
         Scrapper cineplexScrapper = new CinplexScrapper();
         var scrappedData = cineplexScrapper.scrap();
 
-        var parser = new CineplexParser();
-        var movies = parser.parse(scrappedData);
-
-        System.out.println(movies);
+        scrappedData.forEach(rawData -> System.out.println(rawData));
     }
 }
