@@ -26,4 +26,12 @@ public class Movie {
     public void setInfo(ArrayList<MovieInfo> info) {
         this.info = info;
     }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "name='" + name + '\'' +
+                ", info=" + info +
+                '}';
+    }
 }

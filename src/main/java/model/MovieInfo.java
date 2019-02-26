@@ -41,4 +41,13 @@ public class MovieInfo {
     public void setShowTimes(ArrayList<String> showTimes) {
         this.showTimes = showTimes;
     }
+
+    @Override
+    public String toString() {
+        return "MovieInfo{" +
+                "location='" + location + '\'' +
+                ", date=" + date +
+                ", showTimes=" + showTimes +
+                '}';
+    }
 }
