@@ -4,8 +4,14 @@ import model.Location;
 import model.RawData;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CinplexDataParser implements Parser {
+    public CinplexDataParser() {
+        System.out.println("CineplexParser init");
+    }
+
     @Override
     public ArrayList<Location> parse(ArrayList<RawData> rawData) {
         // fetch locations
@@ -28,6 +34,25 @@ public class CinplexDataParser implements Parser {
         System.out.println(movieName);
         System.out.println(timing);
 
+        var times = extractMovieTimes(timing);
+        System.out.println(times);
+
         return null;
+    }
+
+    // get movie times
+    public ArrayList<String> extractMovieTimes(String rawTimeString) {
+        ArrayList<String> movieTimes = new ArrayList<>();
+
+        String regex = "(\\d){2}:(\\d){2} (AM|PM)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(rawTimeString);
+
+        // poll for matches
+        while (matcher.find()) {
+            movieTimes.add(matcher.group());
+        }
+
+        return movieTimes;
     }
 }
