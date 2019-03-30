@@ -2,11 +2,9 @@ package scrapper;
 
 import config.CineplexConfig;
 import config.ScrapperConfiguration;
-import model.Movie;
 import model.RawData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -17,7 +15,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class CinplexScrapper implements Scrapper {
     private URL firefoxDriverURL;

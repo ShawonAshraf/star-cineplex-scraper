@@ -1,6 +1,5 @@
 package parser;
 
-import model.Movie;
 import model.RawData;
 
 import java.util.ArrayList;

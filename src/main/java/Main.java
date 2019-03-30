@@ -1,4 +1,3 @@
-import parser.CineplexParser;
 import scrapper.CinplexScrapper;
 import scrapper.Scrapper;
 
