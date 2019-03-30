@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 public class RawData implements Serializable {
     private String location;
+    // date, showtime key value pair
     private HashMap<String, ArrayList<String>> movieDates;
 
     public RawData(String location) {
