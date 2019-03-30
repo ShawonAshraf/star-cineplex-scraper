@@ -1,10 +1,10 @@
 package parser;
 
-import model.Movie;
+import model.Location;
 import model.RawData;
 
 import java.util.ArrayList;
 
 public interface Parser {
-    ArrayList<Movie> parse(ArrayList<RawData> rawData);
+    ArrayList<Location> parse(ArrayList<RawData> rawData);
 }
