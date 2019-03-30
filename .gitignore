@@ -209,3 +209,5 @@ gradle-app.setting
 
 # End of https://www.gitignore.io/api/osx,java,linux,gradle,windows,intellij+all,visualstudiocode
 
+
+src/main/resources/geckodriver
