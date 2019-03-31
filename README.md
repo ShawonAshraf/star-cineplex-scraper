@@ -67,5 +67,10 @@ Use an IDE. Intellij IDEA preferable.
 } ]
 ```
 
+
+## Known Issues
+Star cineplex website can get unresponsive at times and that'll make your web driver spit up a lot of `stackTrace`. Simply try again.
+
+
 ## License
 MIT
