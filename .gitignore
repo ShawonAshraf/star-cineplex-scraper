@@ -215,3 +215,5 @@ src/main/resources/geckodriver
 data\.ser
 
 parsedData\.ser
+
+output_data/
