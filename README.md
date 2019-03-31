@@ -6,6 +6,7 @@ Scraps movie show times from Star Cineplex website and writes them to a
 
 
 ## Dev
+First download the `gecko` web driver [from here](https://github.com/mozilla/geckodriver/releases) for your OS.. Then,
 
 ### The hard way
 - Install gradle
@@ -19,6 +20,12 @@ gradle build
 
 ### The easy way
 Use an IDE. Intellij IDEA preferable.
+
+## Dependencies
+- `jsoup`
+- `selenium-java`
+- `selenium-firefox-driver`
+- `jackson-databind`
 
 ## Sample JSON output
 ```json
