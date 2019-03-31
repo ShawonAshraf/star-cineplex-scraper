@@ -16,7 +16,7 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class CinplexScrapper implements Scrapper {
+public class CineplexScrapper implements Scrapper {
     private URL firefoxDriverURL;
     private WebDriver webDriver = null;
 
