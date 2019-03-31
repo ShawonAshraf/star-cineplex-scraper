@@ -7,7 +7,7 @@ Scraps movie show times from Star Cineplex website and writes them to a
 
 ## Dev
 First download the `gecko` web driver [from here](https://github.com/mozilla/geckodriver/releases) for your OS.. Then,
-
+__Also check if the star cineplex website is up or not. That's one horrendous website I must say.__
 ### The hard way
 - Install gradle
 - Clone the repo

@@ -58,7 +58,7 @@ public class CineplexScraper implements Scraper {
 
         try {
             System.out.println("Scraper init .......... @ " + new Date().toString());
-            System.out.println(String.format("Scrapping from => %s", CineplexConfig.urlString));
+            System.out.println(String.format("Scraping from => %s", CineplexConfig.urlString));
             // get the url
             webDriver.get(CineplexConfig.urlString);
             // wait until the page loads
@@ -94,7 +94,7 @@ public class CineplexScraper implements Scraper {
         } finally {
             // close the driver
             if (webDriver != null) {
-                System.out.println("\nClosing Web Driver ....");
+                System.out.println("\nClosing Web Driver .... @ " + new Date().toString());
                 webDriver.close();
             }
         }
