@@ -213,3 +213,5 @@ gradle-app.setting
 src/main/resources/geckodriver
 
 data\.ser
+
+parsedData\.ser
