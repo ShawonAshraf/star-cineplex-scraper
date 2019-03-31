@@ -15,6 +15,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CineplexScrapper implements Scrapper {
     private URL firefoxDriverURL;
@@ -22,6 +23,7 @@ public class CineplexScrapper implements Scrapper {
 
     @Override
     public void initHeadlessDriver() {
+        System.out.println("WebDriver init .......... @ " + new Date().toString());
         // headless init
         FirefoxBinary firefoxBinary = new FirefoxBinary();
         firefoxBinary.addCommandLineOptions("--headless");
@@ -30,6 +32,7 @@ public class CineplexScrapper implements Scrapper {
         firefoxOptions.setBinary(firefoxBinary);
         // init
         webDriver = new FirefoxDriver(firefoxOptions);
+        System.out.println("WebDriver init complete. @ " + new Date().toString());
     }
 
     @Override
@@ -54,6 +57,7 @@ public class CineplexScrapper implements Scrapper {
         ArrayList<RawData> data = new ArrayList<>();
 
         try {
+            System.out.println("Scrapper init .......... @ " + new Date().toString());
             System.out.println(String.format("Scrapping from => %s", CineplexConfig.urlString));
             // get the url
             webDriver.get(CineplexConfig.urlString);
@@ -95,6 +99,7 @@ public class CineplexScrapper implements Scrapper {
             }
         }
 
+        System.out.println("Scrapping complete. @ " + new Date().toString());
         return data;
     }
 

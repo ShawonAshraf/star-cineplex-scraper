@@ -6,17 +6,15 @@ import model.Movie;
 import model.RawData;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CineplexDataParser implements Parser {
-    public CineplexDataParser() {
-        System.out.println("CineplexParser init");
-    }
-
     @Override
     public ArrayList<Location> parse(ArrayList<RawData> rawData) {
         // fetch locationNames
+        System.out.println("CineplexParser init .......... @ " + new Date().toString());
         ArrayList<String> locationNames = new ArrayList<>();
         rawData.forEach(k -> locationNames.add(k.getLocation()));
         ArrayList<Location> locations = new ArrayList<>();
@@ -53,6 +51,7 @@ public class CineplexDataParser implements Parser {
             locations.add(location);
         }
 
+        System.out.println("Cineplex parser complete. @ " + new Date().toString());
         return locations;
     }
 
