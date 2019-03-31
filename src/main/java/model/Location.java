@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Location {
     private String name;
-    private ArrayList<Movie> movies;
+    private ArrayList<Dates> dates;
 
-    public Location(String name, ArrayList<Movie> movies) {
+    public Location(String name) {
         this.name = name;
-        this.movies = movies;
+        dates = new ArrayList<>();
     }
 
     public String getName() {
@@ -19,11 +19,19 @@ public class Location {
         this.name = name;
     }
 
-    public ArrayList<Movie> getMovies() {
-        return movies;
+    public ArrayList<Dates> getDates() {
+        return dates;
     }
 
-    public void setMovies(ArrayList<Movie> movies) {
-        this.movies = movies;
+    public void setDates(ArrayList<Dates> dates) {
+        this.dates = dates;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "name='" + name + '\'' +
+                ", dates=" + dates +
+                '}';
     }
 }

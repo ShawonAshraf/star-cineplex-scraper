@@ -1,9 +1,13 @@
 package parser;
 
+import model.Dates;
 import model.Location;
+import model.Movie;
 import model.RawData;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,34 +18,55 @@ public class CineplexDataParser implements Parser {
 
     @Override
     public ArrayList<Location> parse(ArrayList<RawData> rawData) {
-        // fetch locations
-        ArrayList<String> locations = new ArrayList<>();
-        rawData.forEach(k -> locations.add(k.getLocation()));
-
-        // check for bashundhara
-        var bashundhara = locations.get(0);
+        // fetch locationNames
+        ArrayList<String> locationNames = new ArrayList<>();
+        rawData.forEach(k -> locationNames.add(k.getLocation()));
+        ArrayList<Location> locations = new ArrayList<>();
 
 
-        // get movieData
-        var movieDates = rawData.get(0).getMovieDates();
-        var moviesOnADate = movieDates.get("Thursday, April 4, 2019");
-        var movieA = moviesOnADate.get(0);
+        for (int i = 0; i < locationNames.size(); i++) {
+            // current location object
+            String locationName = locationNames.get(i);
+            Location location = new Location(locationName);
 
-        String[] tokens = movieA.split("\n");
-        String movieName = tokens[0];
-        String timing = tokens[1];
+            // get dates for this location
+            // contained in a set here
+            var dates = rawData.get(i).getMovieDates();
+            dates.keySet().forEach(date -> {
+                var moviesOnThisDate = dates.get(date);
+                // create a dates instance
+                var thisDate = new Dates(date);
 
-        System.out.println(movieName);
-        System.out.println(timing);
+                moviesOnThisDate.forEach(movieOnThisDate -> {
+                    // get movie name and showTimeString
+                    var nameAndShowTimeString = extractNameAndShowTimeAsString(movieOnThisDate);
+                    var name = nameAndShowTimeString[0];
+                    var showTimes = extractIndividualShowTimes(nameAndShowTimeString[1]);
 
-        var times = extractMovieTimes(timing);
-        System.out.println(times);
+                    // create a movie instance
+                    Movie movie = new Movie(name, showTimes);
+                    thisDate.getMoviesOnThisDate().add(movie);
+                });
+
+                location.getDates().add(thisDate);
+            });
+
+            // add to locations list
+            locations.add(location);
+        }
 
         return null;
     }
 
-    // get movie times
-    public ArrayList<String> extractMovieTimes(String rawTimeString) {
+    // extract movie name and showTimeString
+    public String[] extractNameAndShowTimeAsString(String info) {
+        return info.split("\n");
+    }
+
+
+    // extract individual show times from movieTimes string
+    // for example, from 11:00 AM 04:50 PM to [ 11:00 AM, 04:50 PM ]
+    public ArrayList<String> extractIndividualShowTimes(String rawTimeString) {
         ArrayList<String> movieTimes = new ArrayList<>();
 
         String regex = "(\\d){2}:(\\d){2} (AM|PM)";

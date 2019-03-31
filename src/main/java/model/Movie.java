@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Movie {
     private String name;
-    private ArrayList<MovieShowTime> showTimes;
+    private ArrayList<String> showTimes;
 
-    public Movie(String name, ArrayList<MovieShowTime> showTimes) {
+    public Movie(String name, ArrayList<String> showTimes) {
         this.name = name;
         this.showTimes = showTimes;
     }
@@ -15,7 +15,15 @@ public class Movie {
         return name;
     }
 
-    public ArrayList<MovieShowTime> getShowTimes() {
+    public ArrayList<String> getShowTimes() {
         return showTimes;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "name='" + name + '\'' +
+                ", showTimes=" + showTimes +
+                '}';
     }
 }
