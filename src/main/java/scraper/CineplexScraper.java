@@ -1,4 +1,4 @@
-package scrapper;
+package scraper;
 
 import config.CineplexConfig;
 import config.ScrapperConfiguration;
@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class CineplexScrapper implements Scrapper {
+public class CineplexScraper implements Scraper {
     private URL firefoxDriverURL;
     private WebDriver webDriver = null;
 
@@ -57,7 +57,7 @@ public class CineplexScrapper implements Scrapper {
         ArrayList<RawData> data = new ArrayList<>();
 
         try {
-            System.out.println("Scrapper init .......... @ " + new Date().toString());
+            System.out.println("Scraper init .......... @ " + new Date().toString());
             System.out.println(String.format("Scrapping from => %s", CineplexConfig.urlString));
             // get the url
             webDriver.get(CineplexConfig.urlString);
@@ -99,7 +99,7 @@ public class CineplexScrapper implements Scrapper {
             }
         }
 
-        System.out.println("Scrapping complete. @ " + new Date().toString());
+        System.out.println("Scraping complete. @ " + new Date().toString());
         return data;
     }
 

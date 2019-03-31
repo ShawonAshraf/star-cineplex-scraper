@@ -3,15 +3,15 @@ package controller;
 import model.RawData;
 import parser.CineplexDataParser;
 import parser.Parser;
-import scrapper.CineplexScrapper;
-import scrapper.Scrapper;
+import scraper.CineplexScraper;
+import scraper.Scraper;
 import utility.JSONHelper;
 import utility.Serializer;
 
 import java.util.ArrayList;
 
 public class ShowKokhonController {
-    private Scrapper cineplexScrapper;
+    private Scraper cineplexScraper;
     private Parser cineplexParser;
 
     private final String rawDataFilePath = "output_dir/data.ser";
@@ -20,7 +20,7 @@ public class ShowKokhonController {
     private final String outputJSONFilePath = "output_dir/cineplex_data.json";
 
     public ShowKokhonController() {
-        cineplexScrapper = new CineplexScrapper();
+        cineplexScraper = new CineplexScraper();
         cineplexParser = new CineplexDataParser();
     }
 
@@ -33,7 +33,7 @@ public class ShowKokhonController {
 
     public void scrapCineplexData() {
         // scrap
-        var scrappedData = cineplexScrapper.scrap();
+        var scrappedData = cineplexScraper.scrap();
         Serializer.writeToFile(rawDataFilePath, scrappedData);
 
 
@@ -41,7 +41,6 @@ public class ShowKokhonController {
 
     public void parseScrappedData() {
         // parse
-        System.out.println("Parsing scrapped data .....");
         var scrappedData = (ArrayList<RawData>) Serializer.readFromFile(rawDataFilePath);
         var parsedData = cineplexParser.parse(scrappedData);
         Serializer.writeToFile(parsedDataFilePath, parsedData);

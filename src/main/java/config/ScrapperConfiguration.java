@@ -18,8 +18,8 @@ public class ScrapperConfiguration {
         cineplexURLString = "http://www.cineplexbd.com/cineplexbd/showtime";
         blockbusterURLString = "";
 
-        cineplexJSONDumpFile = "/scrapper-dump/cineplex.json";
-        blockbusterJSONDumpFile = "/scrapper-dump/blockbuster.json";
+        cineplexJSONDumpFile = "/scraper-dump/cineplex.json";
+        blockbusterJSONDumpFile = "/scraper-dump/blockbuster.json";
 
         firefoxDriverURLString = "geckodriver";
         firefoxDriverName = "webdriver.gecko.driver";

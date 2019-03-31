@@ -1,5 +1,5 @@
-# showkokhon-scrapper
-> Web scrapping and selenium vodoo magic.
+# showkokhon-scraper
+> Web scraping and selenium vodoo magic.
 
 Scraps movie show times from Star Cineplex website and writes them to a
 `JSON` file.
