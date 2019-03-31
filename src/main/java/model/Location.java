@@ -4,20 +4,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Location implements Serializable {
-    private String name;
+    private String locationName;
     private ArrayList<Dates> dates;
 
-    public Location(String name) {
-        this.name = name;
+    public Location(String locationName) {
+        this.locationName = locationName;
         dates = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
+    public String getLocationName() {
+        return locationName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
     public ArrayList<Dates> getDates() {
@@ -31,7 +31,7 @@ public class Location implements Serializable {
     @Override
     public String toString() {
         return "Location{" +
-                "name='" + name + '\'' +
+                "locationName='" + locationName + '\'' +
                 ", dates=" + dates +
                 '}';
     }
