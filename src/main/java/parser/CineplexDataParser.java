@@ -6,8 +6,6 @@ import model.Movie;
 import model.RawData;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -55,7 +53,7 @@ public class CineplexDataParser implements Parser {
             locations.add(location);
         }
 
-        return null;
+        return locations;
     }
 
     // extract movie name and showTimeString
