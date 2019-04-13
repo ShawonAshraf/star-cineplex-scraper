@@ -5,6 +5,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import com.google.firebase.database.FirebaseDatabase;
 import model.Dates;
 import model.Location;
+import model.Movie;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,25 +44,41 @@ public class DbOperations {
         // clear database
         cleanUpDatabase();
 
-        var map = new HashMap<String, ArrayList<Dates>>();
+        // iterate and write to db
         data.forEach(location -> {
             var locationName = location.getLocationName();
             var dates = location.getDates();
 
-            map.put(locationName, dates);
+            dates.forEach(date -> {
+                var dateString = date.getDateString();
+                var movies = date.getMoviesOnThisDate();
+
+                // movie , showTimes pair
+                var movieMap = new HashMap<String, ArrayList<String>>();
+
+                movies.forEach(movie -> {
+                    var name = movie.getName();
+                    var showTimes = movie.getShowTimes();
+
+                    movieMap.put(name, showTimes);
+                });
+
+                try {
+                    // location -> date -> movies -> times
+                    var ref = firestore.collection(collection)
+                            .document(cineplex)
+                            .collection(locationName)
+                            .document(dateString).set(movieMap);
+
+                    System.out.println("WriteDate:: Update Time => " + ref.get().getUpdateTime());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+            });
         });
 
-
-       try {
-           var future = firestore.collection(collection).document(cineplex)
-                   .set(map);
-
-           System.out.println("Write::Update time => " + future.get().getUpdateTime());
-       } catch (InterruptedException e) {
-           e.printStackTrace();
-       } catch (ExecutionException e) {
-           e.printStackTrace();
-       }
     }
 
     public void cleanUpDatabase() {
