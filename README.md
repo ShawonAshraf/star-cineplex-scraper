@@ -8,7 +8,19 @@ Scraps movie show times from Star Cineplex website and writes them to a
 ## Dev
 Make sure to have JDK 11 installed on your machine. Then, download the `gecko` web driver [from here](https://github.com/mozilla/geckodriver/releases) for your OS.
 __Also check if the star cineplex website is up or not. That's one horrendous website I must say.__ After these, follow along :
-### The hard way
+
+### Init Database
+I've used Firebase CloudFireStore here. Why? Because updates should be realtime.
+
+- Create a firebase account.
+- Create a project.
+- Then download your service account credentials from your project settings.
+- Create a directory named `db_secret` at the project root and copy the credentials `json` file there.
+- Rename the file to `db.json`.
+
+Now to building!
+
+#### The hard way
 - Install gradle
 - Clone the repo
 - `cd` into the directory
@@ -18,7 +30,7 @@ __Also check if the star cineplex website is up or not. That's one horrendous we
 gradle build
 ```
 
-### The easy way
+#### The easy way
 Use an IDE. Intellij IDEA preferable.
 
 ## Dependencies
