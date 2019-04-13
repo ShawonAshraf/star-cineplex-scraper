@@ -2,6 +2,8 @@ package scraper;
 
 import config.CineplexConfig;
 import config.ScrapperConfiguration;
+import io.github.bonigarcia.wdm.DriverManagerType;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import model.RawData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,49 +13,31 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class CineplexScraper implements Scraper {
-    private URL firefoxDriverURL;
     private WebDriver webDriver = null;
 
     @Override
-    public void initHeadlessDriver() {
-        System.out.println("WebDriver init .......... @ " + new Date().toString());
-        // headless init
-        FirefoxBinary firefoxBinary = new FirefoxBinary();
-        firefoxBinary.addCommandLineOptions("--headless");
+    public void setupWebDriver() {
+        System.out.println("WebDriver setup started ......... @ " + new Date().toString());
+        WebDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
 
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setBinary(firefoxBinary);
-        // init
-        webDriver = new FirefoxDriver(firefoxOptions);
-        System.out.println("WebDriver init complete. @ " + new Date().toString());
-    }
+        // configure headless driver
+        FirefoxBinary binary = new FirefoxBinary();
+        binary.addCommandLineOptions("--headless");
 
-    @Override
-    public void initDriverURL() {
-        try {
-            firefoxDriverURL = getClass().getClassLoader().getResource(ScrapperConfiguration.firefoxDriverURLString);
-            assert firefoxDriverURL != null;
+        FirefoxOptions options = new FirefoxOptions();
+        options.setBinary(binary);
 
-            // set the prop
-            System.setProperty(ScrapperConfiguration.firefoxDriverName,
-                    Paths.get(firefoxDriverURL.toURI()).toFile().getAbsolutePath());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        webDriver = new FirefoxDriver(options);
+        System.out.println("WebDriver setup finished ......... @ " + new Date().toString());
     }
 
     @Override
     public ArrayList<RawData> scrap() {
-        initDriverURL();
-        initHeadlessDriver();
-
+        setupWebDriver();
         ArrayList<RawData> data = new ArrayList<>();
 
         try {

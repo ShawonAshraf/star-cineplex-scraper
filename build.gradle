@@ -7,9 +7,22 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.11
 
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Showkokhon-Scraper': 'JAR BUILD',
+                'Implementation-Version': version,
+                'Main-Class': 'Main'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+
 repositories {
     mavenCentral()
 }
+
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
@@ -23,4 +36,6 @@ dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
     // firebase
     implementation 'com.google.firebase:firebase-admin:6.8.0'
+    // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
+    compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '3.4.0'
 }
