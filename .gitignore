@@ -219,3 +219,5 @@ parsedData\.ser
 output_dir/
 
 db_secret/
+
+output_data/
