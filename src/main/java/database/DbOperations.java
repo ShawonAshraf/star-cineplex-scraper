@@ -1,5 +1,6 @@
 package database;
 
+import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.cloud.FirestoreClient;
 import com.google.firebase.database.FirebaseDatabase;
@@ -8,6 +9,7 @@ import model.Location;
 import model.Movie;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
@@ -17,6 +19,9 @@ public class DbOperations {
     private Firestore firestore;
     private final String collection = "showkokhon";
     private final String cineplex = "starcineplex";
+
+    private final String bcity = "Bashundhara Shopping Mall, Panthapath";
+    private final String shimanto = "Shimanto Shambhar, Dhanmondi 2";
 
     public DbOperations() {
         dbInstance = new Databaseinitializer().initDBConnection();
@@ -81,15 +86,35 @@ public class DbOperations {
 
     }
 
+    private void deleteDocs(CollectionReference ref) {
+        try {
+            var future = ref.get();
+            var docs = future.get().getDocuments();
+
+            docs.forEach(document -> {
+                document.getReference().delete();
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void cleanUpDatabase() {
         try {
-            var future = firestore.collection(collection).document(cineplex)
-                    .delete();
+            var refBCity = firestore.collection(collection)
+                    .document(cineplex)
+                    .collection(bcity);
 
-            System.out.println("Delete::Update time => " + future.get().getUpdateTime());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+            var refShimanto = firestore.collection(collection)
+                    .document(cineplex)
+                    .collection(shimanto);
+
+            // delete
+            deleteDocs(refBCity);
+            deleteDocs(refShimanto);
+
+            System.out.println("Delete::Update time => " + new Date().toString());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
