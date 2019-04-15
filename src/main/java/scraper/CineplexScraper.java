@@ -1,7 +1,6 @@
 package scraper;
 
 import config.CineplexConfig;
-import config.ScrapperConfiguration;
 import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import model.RawData;

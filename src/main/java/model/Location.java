@@ -1,9 +1,8 @@
 package model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Location implements Serializable {
+public class Location {
     private String locationName;
     private ArrayList<Dates> dates;
 

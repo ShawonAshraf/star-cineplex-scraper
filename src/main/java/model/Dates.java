@@ -1,9 +1,8 @@
 package model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Dates implements Serializable {
+public class Dates {
     private String dateString;
     private ArrayList<Movie> moviesOnThisDate;
 

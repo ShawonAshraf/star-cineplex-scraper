@@ -1,10 +1,9 @@
 package model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RawData implements Serializable {
+public class RawData {
     private String location;
     // date, showtime key value pair
     private HashMap<String, ArrayList<String>> movieDates;

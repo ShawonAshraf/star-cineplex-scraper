@@ -14,11 +14,6 @@ public class ShowKokhonController {
     private Scraper cineplexScraper;
     private Parser cineplexParser;
 
-    private final String rawDataFilePath = "output_dir/data.ser";
-    private final String parsedDataFilePath = "output_dir/parsedData.ser";
-
-    private final String outputJSONFilePath = "output_dir/cineplex_data.json";
-
     public ShowKokhonController() {
         cineplexScraper = new CineplexScraper();
         cineplexParser = new CineplexDataParser();

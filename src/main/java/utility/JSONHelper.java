@@ -2,8 +2,6 @@ package utility;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class JSONHelper {
