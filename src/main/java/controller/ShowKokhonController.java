@@ -1,5 +1,6 @@
 package controller;
 
+import model.Location;
 import model.RawData;
 import parser.CineplexDataParser;
 import parser.Parser;
@@ -24,32 +25,25 @@ public class ShowKokhonController {
         cineplexParser = new CineplexDataParser();
     }
 
-    // run the controller
-    public void run() {
-        scrapCineplexData();
-        parseScrappedData();
-        writeJSON();
-    }
 
-    public void scrapCineplexData() {
+    public ArrayList<RawData> scrapCineplexData() {
         // scrap
         var scrappedData = cineplexScraper.scrap();
-        Serializer.writeToFile(rawDataFilePath, scrappedData);
-
-
+        return scrappedData;
     }
 
-    public void parseScrappedData() {
+    public ArrayList<Location> parseScrappedData(ArrayList<RawData> scrapedData) {
         // parse
-        var scrappedData = (ArrayList<RawData>) Serializer.readFromFile(rawDataFilePath);
-        var parsedData = cineplexParser.parse(scrappedData);
-        Serializer.writeToFile(parsedDataFilePath, parsedData);
+        var parsedData = cineplexParser.parse(scrapedData);
+        return parsedData;
     }
 
-    public void writeJSON() {
-        // write to json
-        var parsedData = Serializer.readFromFile(parsedDataFilePath);
+    public String getDataAsJSON() {
+        // convert to json
+        var scrapedData = scrapCineplexData();
+        var parsedData = parseScrappedData(scrapedData);
         var jsonString = JSONHelper.parseObjectToJSONString(parsedData);
-        JSONHelper.writeJSONStringToFile(jsonString, outputJSONFilePath);
+
+        return jsonString;
     }
 }

@@ -17,8 +17,7 @@ public class DbController {
         dbOps.readFromDb();
     }
 
-    public void write() {
-        var data = (ArrayList<Location>) Serializer.readFromFile("output_dir/parsedData.ser");
+    public void write(ArrayList<Location> data) {
         dbOps.writeToDb(data);
     }
 
