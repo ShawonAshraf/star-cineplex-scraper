@@ -13,7 +13,8 @@ public class Databaseinitializer {
     public FirebaseDatabase initDBConnection() {
         try {
             InputStream configFile = this.getClass()
-                    .getResourceAsStream("../db_secret/db.json");
+                    .getClassLoader()
+                    .getResourceAsStream("db_secret/db.json");
 
             FirebaseOptions firebaseOptions = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(configFile))
