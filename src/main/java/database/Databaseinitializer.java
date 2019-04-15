@@ -7,12 +7,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class Databaseinitializer {
     // init db connection and then return the init db instance
     public FirebaseDatabase initDBConnection() {
         try {
-            FileInputStream configFile = new FileInputStream("db_secret/db.json");
+            InputStream configFile = this.getClass()
+                    .getResourceAsStream("../db_secret/db.json");
 
             FirebaseOptions firebaseOptions = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(configFile))
