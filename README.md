@@ -1,8 +1,7 @@
 # showkokhon-scraper
 > Web scraping and selenium vodoo magic.
 
-Scraps movie show times from Star Cineplex website and writes them to a
-`JSON` file.
+Scraps movie show times from Star Cineplex website and pushes them to a CloudFireStore Database.
 
 
 ## Dev
