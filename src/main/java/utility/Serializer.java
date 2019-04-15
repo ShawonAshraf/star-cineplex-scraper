@@ -17,10 +17,12 @@ public class Serializer {
     public static Object readFromFile(String filePath) {
         Object obj = null;
 
-        try (FileInputStream file = new FileInputStream(filePath);
-             ObjectInputStream in = new ObjectInputStream(file)
-        ) {
-            obj = in.readObject();
+        try {
+            InputStream in = Serializer.class.getClassLoader()
+                    .getResourceAsStream(filePath);
+            ObjectInputStream reader = new ObjectInputStream(in);
+
+            obj = reader.readObject();
         } catch (Exception e) {
             e.printStackTrace();
         }
