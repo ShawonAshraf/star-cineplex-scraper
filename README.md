@@ -5,7 +5,7 @@ Scraps movie show times from Star Cineplex website and pushes them to a CloudFir
 
 
 ## Dev
-*Make sure to have JDK 11 installed and Firefox gecko driver downloaded on your machine.*
+*Make sure to have JDK 11 and Firefox/Chrome installed on your machine.*
 __Also check if the star cineplex website is up or not. That's one horrendous website I must say.__ After these, follow along :
 
 ### Init Database

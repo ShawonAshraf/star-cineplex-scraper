@@ -2,6 +2,7 @@ package scraper;
 
 import config.CineplexConfig;
 import io.github.bonigarcia.wdm.DriverManagerType;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import model.RawData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,20 +22,7 @@ public class CineplexScraper implements Scraper {
     @Override
     public void setupWebDriver() {
         System.out.println("WebDriver setup started ......... @ " + new Date().toString());
-
-        // driver url
-        var driverURL = this.getClass()
-                .getClassLoader()
-                .getResource("geckodriver");
-
-        try {
-            System.setProperty(
-                    "webdriver.gecko.driver",
-                    Paths.get(driverURL.toURI()).toFile().getAbsolutePath());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        WebDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
         // configure headless driver
         FirefoxBinary binary = new FirefoxBinary();
         binary.addCommandLineOptions("--headless");

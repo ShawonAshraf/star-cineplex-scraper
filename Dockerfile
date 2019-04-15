@@ -1,5 +1,6 @@
 FROM gradle:5.3-jdk11-slim as builder
 COPY --chown=gradle:gradle . /home/scraper
+RUN export PATH=$PATH:/home/scraper/src/main/resources/geckodriver
 WORKDIR /home/scraper
 RUN gradle fatJar
 
