@@ -28,19 +28,36 @@ public class DbOperations {
         firestore = FirestoreClient.getFirestore();
     }
 
+    private void readDocs(CollectionReference ref, String location) {
+        try {
+            System.out.println("Data for :: " + location);
+            var future = ref.get();
+            var docList = future.get().getDocuments();
+
+            docList.forEach(doc -> {
+                System.out.println(doc.getId());
+                System.out.println(doc.getData());
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void readFromDb() {
         try {
-            var snapshot = firestore.collection(collection).document(cineplex).get();
-            var doc = snapshot.get();
+            var refBCity = firestore.collection(collection)
+                    .document(cineplex)
+                    .collection(bcity);
 
-            if (doc.exists()) {
-                System.out.println(doc.getData());
-            } else {
-                System.out.println("No data in the database!");
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+            var refShimanto = firestore.collection(collection)
+                    .document(cineplex)
+                    .collection(shimanto);
+
+
+            readDocs(refBCity, bcity);
+            readDocs(refShimanto, shimanto);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
