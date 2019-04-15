@@ -34,8 +34,9 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: '3.141.59'
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
-    // firebase
-    implementation 'com.google.firebase:firebase-admin:6.8.0'
+    // https://mvnrepository.com/artifact/com.google.firebase/firebase-admin
+    compile group: 'com.google.firebase', name: 'firebase-admin', version: '6.8.0'
+
     // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
     compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '3.4.0'
 }
