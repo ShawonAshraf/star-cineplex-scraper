@@ -7,7 +7,6 @@ import parser.Parser;
 import scraper.CineplexScraper;
 import scraper.Scraper;
 import utility.JSONHelper;
-import utility.Serializer;
 
 import java.util.ArrayList;
 

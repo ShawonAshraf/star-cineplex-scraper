@@ -2,7 +2,6 @@ package controller;
 
 import database.DbOperations;
 import model.Location;
-import utility.Serializer;
 
 import java.util.ArrayList;
 

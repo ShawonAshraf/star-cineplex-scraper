@@ -19,15 +19,4 @@ public class JSONHelper {
 
         return null;
     }
-
-    public static void writeJSONStringToFile(String jsonString, String fileName) {
-        try (FileWriter file = new FileWriter(fileName);
-            BufferedWriter out = new BufferedWriter(file)
-        ) {
-            out.write(jsonString);
-            System.out.println("JSON has been written to " + fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
