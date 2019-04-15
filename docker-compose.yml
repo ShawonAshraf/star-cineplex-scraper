@@ -1,0 +1,35 @@
+version: "3"
+services:
+  app:
+    build: .
+    depends_on:
+      - hub
+      - chromeNode
+      - firefoxNode
+    environment:
+      BROWSER: chrome
+      HUB_HOST: hub
+      PLATFORM: en
+      HOST: dawanda.com
+      PORT: 4444
+
+  hub:
+    image: selenium/hub:3.7.1-argon
+    ports:
+      - "4444"
+
+  chromeNode:
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+    ports:
+      - 5900
+    image: selenium/node-chrome:3.7.1-argon
+
+  firefoxNode:
+    environment:
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+    ports:
+      - 5900
+    image: selenium/node-firefox:3.7.1-argon
