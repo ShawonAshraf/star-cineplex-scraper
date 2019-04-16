@@ -1,4 +1,4 @@
-# showkokhon-scraper
+# star-cinplex-scraper
 > Web scraping and selenium vodoo magic.
 
 Scraps movie show times from Star Cineplex website and pushes them to a CloudFireStore Database.
